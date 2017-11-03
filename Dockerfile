@@ -1,7 +1,7 @@
 
 ##################################################
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## Spark + Python 3
+## Spark + Python 3 + Netcat
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##################################################
 
@@ -15,6 +15,7 @@ RUN apt-get -q update && apt-get install -y --no-install-recommends \
     curl   \
     git    \
     unzip  \
+    netcat \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
