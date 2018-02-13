@@ -1,7 +1,7 @@
 
 ##################################################
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## Spark + Python 3 + Netcat
+## Spark + Python 3
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##################################################
 
@@ -15,7 +15,6 @@ RUN apt-get -q update && apt-get install -y --no-install-recommends \
     curl   \
     git    \
     unzip  \
-    netcat \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -32,7 +31,7 @@ RUN conda install --yes --quiet 'openjdk==8.0.121' \
 #-------------------------------------------------
 #-- SPARK
 #-------------------------------------------------
-ENV SPARK_VERSION=2.2.0 
+ENV SPARK_VERSION=2.2.1 
 ENV SPARK_PACKAGE=spark-${SPARK_VERSION}-bin-hadoop2.7 \
     SPARK_HOME=/usr/spark-${SPARK_VERSION}
 ENV PATH=${PATH}:${SPARK_HOME}/bin
