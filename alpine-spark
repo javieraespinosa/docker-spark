@@ -1,0 +1,43 @@
+
+FROM frolvlad/alpine-miniconda3
+
+#-----------------------------------------------------
+# Dev Tools
+#-----------------------------------------------------
+RUN apk --no-cache add --update \
+    bash  \
+    curl  \
+    git   \
+    unzip \
+ && rm -rf /var/cache/apk/*
+
+
+#-------------------------------------------------
+#-- JAVA
+#-------------------------------------------------
+ENV JAVA_HOME=/opt/conda/pkgs/openjdk-8.0.121-1
+
+RUN conda install --yes --quiet 'openjdk==8.0.121' \
+ && conda clean -tipsy
+ 
+
+#-------------------------------------------------
+#-- SPARK
+#-------------------------------------------------
+ENV SPARK_VERSION=2.2.1 
+ENV SPARK_PACKAGE=spark-${SPARK_VERSION}-bin-hadoop2.7 \
+    SPARK_HOME=/usr/spark-${SPARK_VERSION}
+ENV PATH=${PATH}:${SPARK_HOME}/bin
+
+RUN curl -sL --retry 3 \
+  "http://apache.rediris.es/spark/spark-${SPARK_VERSION}/${SPARK_PACKAGE}.tgz" \
+  | gunzip \
+  | tar x -C /usr/ \
+ && mv /usr/${SPARK_PACKAGE} ${SPARK_HOME} \
+ && chown -R root:root ${SPARK_HOME}
+
+
+RUN apk --no-cache add --update \
+    bash   \
+ && rm -rf /var/cache/apk/*
+
